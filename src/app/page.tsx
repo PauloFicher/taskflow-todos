@@ -14,7 +14,6 @@ export default function TodoApp() {
     filter, 
     setFilter, 
     addTodo, 
-    updateTodo, 
     deleteTodo, 
     toggleTodoStatus, 
     stats, 
@@ -83,7 +82,7 @@ export default function TodoApp() {
         {/* Header */}
         <header className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold gradient-text">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent">
               TaskFlow Todos
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mt-1">
@@ -137,7 +136,7 @@ export default function TodoApp() {
               placeholder="Añadir nueva tarea..."
               className="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-violet-500"
             />
-            <button type="submit" className="btn-primary flex items-center gap-2">
+            <button type="submit" className="px-6 py-3 bg-gradient-to-r from-violet-600 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center gap-2">
               <Plus className="w-5 h-5" />
               Añadir
             </button>
@@ -161,42 +160,42 @@ export default function TodoApp() {
           </div>
           
           {/* Filter Tabs */}
-<div className="p-4 md:p-6 pb-0">
-  {/* Mobile: Dropdown */}
-  <div className="md:hidden mb-4">
-    <select
-      value={filter.status}
-      onChange={(e) => setFilter({ ...filter, status: e.target.value as any })}
-      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
-    >
-      {filterOptions.map((option) => (
-        <option key={option.id} value={option.id}>
-          {option.label} ({option.count})
-        </option>
-      ))}
-    </select>
-  </div>
-  
-  {/* Desktop: Tabs */}
-  <div className="hidden md:flex space-x-1 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
-    {filterOptions.map((option) => (
-      <button
-        key={option.id}
-        onClick={() => setFilter({ ...filter, status: option.id as any })}
-        className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 text-sm font-medium rounded-md transition-all ${
-          filter.status === option.id 
-            ? 'bg-white dark:bg-gray-800 text-violet-600 shadow-sm' 
-            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
-        }`}
-      >
-        {option.label}
-        <span className="bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-400 px-2 py-0.5 rounded-full text-xs">
-          {option.count}
-        </span>
-      </button>
-    ))}
-  </div>
-</div>
+          <div className="p-4 md:p-6 pb-0">
+            {/* Mobile: Dropdown */}
+            <div className="md:hidden mb-4">
+              <select
+                value={filter.status}
+                onChange={(e) => setFilter({ ...filter, status: e.target.value as 'all' | 'todo' | 'progress' | 'done' })}
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-violet-500"
+              >
+                {filterOptions.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label} ({option.count})
+                  </option>
+                ))}
+              </select>
+            </div>
+            
+            {/* Desktop: Tabs */}
+            <div className="hidden md:flex space-x-1 bg-gray-100 dark:bg-gray-700 p-1 rounded-lg">
+              {filterOptions.map((option) => (
+                <button
+                  key={option.id}
+                  onClick={() => setFilter({ ...filter, status: option.id as 'all' | 'todo' | 'progress' | 'done' })}
+                  className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 text-sm font-medium rounded-md transition-all ${
+                    filter.status === option.id 
+                      ? 'bg-white dark:bg-gray-800 text-violet-600 shadow-sm' 
+                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                  }`}
+                >
+                  {option.label}
+                  <span className="bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-400 px-2 py-0.5 rounded-full text-xs">
+                    {option.count}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
           
           {/* Todo List */}
           <div className="p-6">

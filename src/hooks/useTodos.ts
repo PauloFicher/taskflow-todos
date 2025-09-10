@@ -13,7 +13,7 @@ export const useTodos = () => {
     const savedTodos = localStorage.getItem(STORAGE_KEY);
     if (savedTodos) {
       try {
-        const parsedTodos = JSON.parse(savedTodos).map((todo: any) => ({
+        const parsedTodos = JSON.parse(savedTodos).map((todo: Todo) => ({
           ...todo,
           createdAt: new Date(todo.createdAt),
           updatedAt: new Date(todo.updatedAt),
